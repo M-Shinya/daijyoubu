@@ -36,4 +36,6 @@
 </p>
 
 <%= link_to 'Edit', edit_sagyoushiji_path(@sagyoushiji) %> |
-<%= link_to 'Back', sagyoushijis_path %>
+<%= link_to 'Print', sagyoushiji_path(@sagyoushiji,:format=>:docx)  %> |
+<%= link_to 'Back', sagyoushijis_path %>|
+<%= link_to 'Download', sagyoushijis_path(@sagyoushiji, format: :docx) %>

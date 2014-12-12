@@ -6,17 +6,7 @@ Rails.application.routes.draw do
   resources :sagyouhoukokus
 
   resources :sagyoushijis
-
-  resources :youinwariates
-
-  resources :partnermembers
-
-  resources :busyos
-
-  resources :itakuhakens
-
-  resources :jyucyus
-
+  
   resources :kokyakus
 
   resources :partners

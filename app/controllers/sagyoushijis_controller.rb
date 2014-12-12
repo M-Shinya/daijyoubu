@@ -10,6 +10,14 @@ class SagyoushijisController < ApplicationController
   # GET /sagyoushijis/1
   # GET /sagyoushijis/1.json
   def show
+  respond_to do |format|
+        format.html
+        format.json { render json: @sagyoushiji}
+        format.docx{send_data Sagyoushiji.docx(@sagyoushiji),type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',filename:"fuga.docx"}
+        #format.docx {download_docx(@sagyoushiji),type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document;charset=shift_jis',filename:"fuga.docx"}
+        #file = download_docx(@sagyoujishi)
+        #format.docx {send_data file,type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document;charset=shift_jis',filename:"fuga.docx" }
+   end
   end
 
   # GET /sagyoushijis/new
@@ -60,6 +68,28 @@ class SagyoushijisController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+    #印刷
+    def sagyoushijis_print
+    end  
+  
+  def download_docx(sagyoushiji)
+    input_file = "./tmp/template.docx"
+    data = {
+      key: "日本語でようこそ",
+      hello: "hello world",
+      students: [
+        {name: "おぱ", score: 88},
+        {name: "富夫", score: 50},
+        {name: "久子", score: 40}
+      ]
+    }
+    new_doc = DocxTemplater::DocxCreator.new(input_file, data)
+    new_doc.generate_docx_file('./tmp/output.docx')
+
+    return new_doc
+
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -71,4 +101,5 @@ class SagyoushijisController < ApplicationController
     def sagyoushiji_params
       params.require(:sagyoushiji).permit(:itakuhaken_id, :sagyouhoukoku_id, :atena, :sashidashi, :jisshinaiyou, :sumi, :nengetsu)
     end
+    
 end

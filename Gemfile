@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+#word用
+gem 'docx_templater', github: 'jawspeak/ruby-docx-templater'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
